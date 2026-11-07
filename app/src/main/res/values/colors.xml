@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="deep_black">#080A12</color>
+    <color name="midnight_navy">#10172A</color>
+    <color name="electric_purple">#8B5CF6</color>
+    <color name="neon_blue">#38BDF8</color>
+    <color name="soft_white">#F8FAFC</color>
+    <color name="glass_card">#1A10172A</color>
+    <color name="glass_border">#3338BDF8</color>
+</resources>

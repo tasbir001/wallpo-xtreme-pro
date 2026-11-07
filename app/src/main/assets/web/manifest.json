@@ -1,0 +1,22 @@
+{
+  "name": "WALLPO XTREME PRO",
+  "short_name": "WALLPO PRO",
+  "description": "Imagine It. Generate It. Make It Your Wallpaper. Premium AI-powered 4K wallpapers created by MD. TASBIR - UL ISLAM.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080A12",
+  "theme_color": "#080A12",
+  "icons": [
+    {
+      "src": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=192&auto=format&fit=crop&q=80",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=512&auto=format&fit=crop&q=80",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

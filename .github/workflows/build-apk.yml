@@ -1,0 +1,95 @@
+name: Build WALLPO XTREME PRO APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Android Release & Debug APK
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease --stacktrace
+
+      - name: Rename APKs
+        run: |
+          mkdir -p output_apks
+          cp app/build/outputs/apk/release/app-release.apk output_apks/WALLPO-XTREME-PRO-v1.0.0-Release.apk || true
+          cp app/build/outputs/apk/debug/app-debug.apk output_apks/WALLPO-XTREME-PRO-v1.0.0-Debug.apk || true
+
+      - name: Upload Release APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WALLPO-XTREME-PRO-Release-APK
+          path: output_apks/WALLPO-XTREME-PRO-v1.0.0-Release.apk
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WALLPO-XTREME-PRO-Debug-APK
+          path: output_apks/WALLPO-XTREME-PRO-v1.0.0-Debug.apk
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Create GitHub Release
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: "WALLPO XTREME PRO v1.0.0 - Premium AI Wallpaper Studio"
+          body: |
+            ## 🎨 WALLPO XTREME PRO v1.0.0 Pro Edition
+            > **Imagine It. Generate It. Make It Your Wallpaper.**
+
+            **Created By:** **MD. TASBIR - UL ISLAM**
+
+            ---
+
+            ### ✨ Key Features:
+            - **Futuristic Glassmorphism UI:** Dark theme default (`#080A12`), frosted glass cards, ambient neon glows (`#8B5CF6`, `#38BDF8`).
+            - **Genuine Free AI Generation:** Powered by FLUX.1 generative model with zero waitlists, 100% free forever.
+            - **AI Prompt Assistant:** 1-tap smart prompt expansion into cinematic 4K tokens.
+            - **17 Art Styles:** Realistic, Ultra-Realistic, Anime, Cyberpunk, AMOLED True Black, Fantasy, Nature, Cinematic, 3D Render, etc.
+            - **Interactive Phone Screen Mockup:** Preview lock screen clock & home screen apps before setting wallpaper.
+            - **27 Dedicated Categories:** Anime, Gaming, Cars, Bikes, Mountains, Space, Superheroes, CR7, Messi, AMOLED, etc.
+            - **Native Android Wallpaper Engine:** 1-tap apply to Home Screen, Lock Screen, or Both via Android `WallpaperManager`.
+            - **Offline Storage:** Save favorites, downloads, and AI creations locally.
+
+            ---
+
+            ### 📱 Download Android APK:
+            - 📥 **[Download Signed Release APK (WALLPO-XTREME-PRO-v1.0.0-Release.apk)](https://github.com/tasbir001/wallpo-xtreme-pro/releases/download/v1.0.0/WALLPO-XTREME-PRO-v1.0.0-Release.apk)**
+            - 🛠️ **[Download Debug APK (WALLPO-XTREME-PRO-v1.0.0-Debug.apk)](https://github.com/tasbir001/wallpo-xtreme-pro/releases/download/v1.0.0/WALLPO-XTREME-PRO-v1.0.0-Debug.apk)**
+
+            ---
+            *© 2026 WALLPO XTREME PRO. All Rights Reserved. Created By MD. TASBIR - UL ISLAM.*
+          files: |
+            output_apks/WALLPO-XTREME-PRO-v1.0.0-Release.apk
+            output_apks/WALLPO-XTREME-PRO-v1.0.0-Debug.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

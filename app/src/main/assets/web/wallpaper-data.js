@@ -1,0 +1,285 @@
+// WALLPO XTREME PRO - Wallpaper Data & AI Knowledge Base
+// Created By MD. TASBIR - UL ISLAM
+
+const WALLPAPER_CATEGORIES = [
+  { id: "anime", name: "Anime", count: 48, icon: "sparkles", gradient: "from-pink-500 to-rose-600", cover: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80" },
+  { id: "gaming", name: "Gaming", count: 42, icon: "gamepad-2", gradient: "from-purple-600 to-indigo-700", cover: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=80" },
+  { id: "cars", name: "Cars", count: 36, icon: "car", gradient: "from-red-600 to-amber-600", cover: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800&auto=format&fit=crop&q=80" },
+  { id: "bikes", name: "Bikes", count: 30, icon: "bike", gradient: "from-orange-500 to-red-600", cover: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800&auto=format&fit=crop&q=80" },
+  { id: "nature", name: "Nature", count: 64, icon: "trees", gradient: "from-emerald-500 to-teal-700", cover: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&auto=format&fit=crop&q=80" },
+  { id: "mountains", name: "Mountains", count: 38, icon: "mountain", gradient: "from-cyan-600 to-blue-800", cover: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop&q=80" },
+  { id: "ocean", name: "Ocean", count: 34, icon: "waves", gradient: "from-blue-500 to-cyan-600", cover: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80" },
+  { id: "space", name: "Space", count: 52, icon: "orbit", gradient: "from-violet-700 to-purple-900", cover: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80" },
+  { id: "galaxy", name: "Galaxy", count: 46, icon: "disc", gradient: "from-fuchsia-600 to-purple-800", cover: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=800&auto=format&fit=crop&q=80" },
+  { id: "abstract", name: "Abstract", count: 58, icon: "shapes", gradient: "from-indigo-500 to-purple-700", cover: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80" },
+  { id: "minimalist", name: "Minimalist", count: 40, icon: "minimize-2", gradient: "from-slate-600 to-slate-900", cover: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=800&auto=format&fit=crop&q=80" },
+  { id: "dark-aesthetic", name: "Dark Aesthetic", count: 54, icon: "moon", gradient: "from-gray-900 to-black", cover: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&auto=format&fit=crop&q=80" },
+  { id: "superheroes", name: "Superheroes", count: 32, icon: "shield-alert", gradient: "from-red-600 to-blue-700", cover: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&auto=format&fit=crop&q=80" },
+  { id: "football", name: "Football", count: 35, icon: "trophy", gradient: "from-emerald-600 to-green-800", cover: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80" },
+  { id: "cristiano-ronaldo", name: "Cristiano Ronaldo", count: 28, icon: "flame", gradient: "from-red-700 to-amber-700", cover: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80" },
+  { id: "lionel-messi", name: "Lionel Messi", count: 28, icon: "crown", gradient: "from-sky-600 to-blue-800", cover: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=800&auto=format&fit=crop&q=80" },
+  { id: "technology", name: "Technology", count: 44, icon: "cpu", gradient: "from-cyan-500 to-blue-600", cover: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80" },
+  { id: "architecture", name: "Architecture", count: 38, icon: "building", gradient: "from-amber-600 to-stone-800", cover: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=80" },
+  { id: "luxury", name: "Luxury", count: 32, icon: "gem", gradient: "from-amber-400 to-yellow-600", cover: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop&q=80" },
+  { id: "animals", name: "Animals", count: 45, icon: "cat", gradient: "from-yellow-600 to-amber-800", cover: "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=800&auto=format&fit=crop&q=80" },
+  { id: "girls", name: "Girls", count: 40, icon: "heart", gradient: "from-pink-600 to-purple-600", cover: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80" },
+  { id: "aesthetic", name: "Aesthetic", count: 50, icon: "palette", gradient: "from-rose-400 to-violet-500", cover: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=800&auto=format&fit=crop&q=80" },
+  { id: "fantasy", name: "Fantasy", count: 48, icon: "wand-2", gradient: "from-purple-500 to-indigo-800", cover: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80" },
+  { id: "cyberpunk", name: "Cyberpunk", count: 55, icon: "zap", gradient: "from-yellow-400 via-pink-500 to-cyan-500", cover: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&auto=format&fit=crop&q=80" },
+  { id: "amoled", name: "AMOLED", count: 62, icon: "sun-dim", gradient: "from-black via-zinc-900 to-purple-950", cover: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&auto=format&fit=crop&q=80" },
+  { id: "3d-wallpapers", name: "3D Wallpapers", count: 46, icon: "box", gradient: "from-teal-500 to-indigo-600", cover: "https://images.unsplash.com/photo-1633493106115-613d50f0fc11?w=800&auto=format&fit=crop&q=80" },
+  { id: "quotes", name: "Quotes", count: 30, icon: "quote", gradient: "from-blue-600 to-slate-800", cover: "https://images.unsplash.com/photo-1507842229451-7f01be7f7a26?w=800&auto=format&fit=crop&q=80" }
+];
+
+const AI_ART_STYLES = [
+  { id: "realistic-photography", name: "Realistic Photography", icon: "camera", tag: "realism", promptSuffix: "professional award-winning photography, shot on Sony A7R V, 85mm f/1.4 lens, natural dramatic lighting, ultra-sharp focus, photorealistic 8k, raw color grading" },
+  { id: "ultra-realistic", name: "Ultra Realistic", icon: "eye", tag: "hyperreal", promptSuffix: "ultra-photorealistic masterpiece, 8k resolution, Hasselblad 100MP, micro-details, cinematic volumetric lighting, ray tracing, octane render, flawless clarity" },
+  { id: "anime", name: "Anime", icon: "sparkles", tag: "anime", promptSuffix: "breathtaking anime artwork, Makoto Shinkai and Ufotable aesthetic, radiant glowing vibrant colors, intricate details, anime cinematic wallpaper, studio ghibli lighting" },
+  { id: "cyberpunk", name: "Cyberpunk", icon: "zap", tag: "scifi", promptSuffix: "futuristic cyberpunk aesthetic, neon volumetric illumination, rainy reflective asphalt, holographic glitch displays, high-tech dark atmosphere, synthwave 8k wallpaper" },
+  { id: "minimalist", name: "Minimalist", icon: "minimize", tag: "clean", promptSuffix: "elegant minimalist design, clean lines, negative space, serene balanced composition, modern aesthetic, soft gradient backdrop, 8k minimalist wallpaper" },
+  { id: "abstract", name: "Abstract", icon: "shapes", tag: "modern", promptSuffix: "fluid abstract art, holographic refractive glass, dynamic swirling iridescent liquid, 3D caustic lighting, contemporary digital sculpture, 8k wallpaper" },
+  { id: "3d-render", name: "3D Render", icon: "box", tag: "3d", promptSuffix: "masterpiece 3D CGI render, Blender Cycles, subsurface scattering, tactile textures, studio spotlighting, hyper-detailed depth of field, 8k resolution" },
+  { id: "fantasy", name: "Fantasy", icon: "wand-2", tag: "magic", promptSuffix: "epic high fantasy illustration, ethereal magical glow, bioluminescent flora, ancient floating ruins, mythical atmosphere, ArtStation trending, cinematic 8k" },
+  { id: "nature-photography", name: "Nature Photography", icon: "trees", tag: "nature", promptSuffix: "National Geographic award-winning landscape, golden hour sunlight rays, crystal clear reflection, breathtaking atmospheric perspective, 8k ultra-HD nature" },
+  { id: "cinematic", name: "Cinematic", icon: "film", tag: "cinema", promptSuffix: "cinematic still from an IMAX blockbuster movie, 70mm film stock, anamorphic lens flare, moody color grading, dramatic chiaroscuro lighting, emotional depth" },
+  { id: "digital-art", name: "Digital Art", icon: "brush", tag: "illustration", promptSuffix: "concept digital painting, intricate brushwork, dynamic composition, vibrant palette, trending on ArtStation, polished masterpiece wallpaper" },
+  { id: "dark-aesthetic", name: "Dark Aesthetic", icon: "moon", tag: "dark", promptSuffix: "moody dark aesthetic, gothic mystery, deep shadows, atmospheric smoke, subtle glowing accents, cinematic dark tone, 8k dark wallpaper" },
+  { id: "space-galaxy", name: "Space & Galaxy", icon: "orbit", tag: "cosmos", promptSuffix: "breathtaking deep space photography, James Webb Space Telescope view, glowing nebula gas clouds, distant spiral galaxies, cosmic dust, star clusters in 8k" },
+  { id: "luxury", name: "Luxury", icon: "gem", tag: "gold", promptSuffix: "luxurious premium aesthetic, polished black marble, brushed gold accents, emerald crystal reflections, ultra-high-end design, opulent lighting, 8k elegance" },
+  { id: "neon-art", name: "Neon Art", icon: "flame", tag: "neon", promptSuffix: "radiant electric neon lights, glowing vibrant tubes, dark futuristic backdrop, intense luminescence, vivid magenta and cyan glow, 8k neon wallpaper" },
+  { id: "vintage", name: "Vintage", icon: "clock", tag: "retro", promptSuffix: "nostalgic retro vintage photography, subtle film grain, Kodak Portra 400 aesthetic, warm golden tones, 1980s retro wave mood, timeless classic" },
+  { id: "surrealism", name: "Surrealism", icon: "sparkle", tag: "surreal", promptSuffix: "mind-bending surrealism artwork, Salvador Dali and René Magritte inspired, dreamlike impossible geometry, metaphysical wonders, 8k surreal masterpiece" }
+];
+
+const RESOLUTION_OPTIONS = [
+  { id: "mobile-9-16", name: "9:16 Mobile", label: "Mobile Wallpaper", width: 720, height: 1280, icon: "smartphone", popular: true },
+  { id: "desktop-16-9", name: "16:9 Desktop", label: "Desktop 4K", width: 1280, height: 720, icon: "monitor" },
+  { id: "square-1-1", name: "1:1 Square", label: "Square Avatar", width: 1024, height: 1024, icon: "square" },
+  { id: "hd", name: "HD", label: "1280×720", width: 1280, height: 720, icon: "tv" },
+  { id: "fhd", name: "Full HD", label: "1080×1920", width: 1080, height: 1920, icon: "smartphone" },
+  { id: "2k", name: "2K Quad HD", label: "1440×2560", width: 1080, height: 1920, icon: "sparkles" },
+  { id: "4k", name: "4K Ultra HD", label: "2160×3840", width: 1080, height: 1920, icon: "crown" }
+];
+
+const SAMPLE_WALLPAPERS = [
+  {
+    id: "wallpo-1",
+    title: "Cyberpunk Tokyo Rain",
+    category: "cyberpunk",
+    style: "cyberpunk",
+    aspect: "mobile-9-16",
+    resolution: "4K Ultra HD (1080×1920)",
+    prompt: "Futuristic Neo-Tokyo street in pouring rain, glowing neon kanji signs, reflections on wet asphalt, cybernetic traveler with glowing umbrella, volumetric fog",
+    image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=1080&auto=format&fit=crop&q=90",
+    likes: 3420,
+    tags: ["Cyberpunk", "Tokyo", "Neon", "Rain", "AMOLED"],
+    colors: ["#38BDF8", "#8B5CF6", "#080A12"],
+    featured: true,
+    trending: true,
+    daily: true
+  },
+  {
+    id: "wallpo-2",
+    title: "Cosmic Nebula Portal",
+    category: "space",
+    style: "space-galaxy",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Mystical cosmic stargate in deep space surrounded by glowing violet and sapphire nebula dust, sparkling stars, realistic deep astronomy",
+    image: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=1080&auto=format&fit=crop&q=90",
+    likes: 2890,
+    tags: ["Space", "Galaxy", "Nebula", "Cosmic", "Stars"],
+    colors: ["#8B5CF6", "#38BDF8", "#1E1B4B"],
+    featured: true,
+    trending: true
+  },
+  {
+    id: "wallpo-3",
+    title: "True AMOLED Dark Eclipse",
+    category: "amoled",
+    style: "dark-aesthetic",
+    aspect: "mobile-9-16",
+    resolution: "AMOLED 4K (1080×1920)",
+    prompt: "Pure #000000 deep black AMOLED background with minimalist glowing solar eclipse ring, diamond coronal flare, electric neon rim light",
+    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=1080&auto=format&fit=crop&q=90",
+    likes: 4120,
+    tags: ["AMOLED", "Dark", "Eclipse", "Minimalist", "OLED"],
+    colors: ["#000000", "#F59E0B", "#18181B"],
+    featured: true,
+    trending: true
+  },
+  {
+    id: "wallpo-4",
+    title: "Anime Cherry Blossom Sanctuary",
+    category: "anime",
+    style: "anime",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Makoto Shinkai style Japanese shrine during sakura cherry blossom season, glowing pink petals falling, golden sunset skies, crystal clear pond",
+    image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1080&auto=format&fit=crop&q=90",
+    likes: 5120,
+    tags: ["Anime", "Sakura", "Japan", "Sunset", "Ghibli"],
+    colors: ["#EC4899", "#F43F5E", "#3B82F6"],
+    featured: true,
+    trending: true
+  },
+  {
+    id: "wallpo-5",
+    title: "Lamborghini Hypercar in Neon City",
+    category: "cars",
+    style: "ultra-realistic",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Matte black Lamborghini Revuelto supercar parked under purple and teal neon skyway, carbon fiber details, glowing LED taillights, 8k",
+    image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1080&auto=format&fit=crop&q=90",
+    likes: 3950,
+    tags: ["Cars", "Supercar", "Lamborghini", "Luxury", "Neon"],
+    colors: ["#F97316", "#0F172A", "#38BDF8"],
+    featured: true,
+    trending: true
+  },
+  {
+    id: "wallpo-6",
+    title: "CR7 Celebration 4K",
+    category: "cristiano-ronaldo",
+    style: "cinematic",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Cristiano Ronaldo iconic celebration in roaring packed stadium, dramatic spotlights, electric aura, golden confetti, 8k sports photography",
+    image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1080&auto=format&fit=crop&q=90",
+    likes: 7200,
+    tags: ["Ronaldo", "CR7", "Football", "GOAT", "Sports"],
+    colors: ["#DC2626", "#F59E0B", "#111827"],
+    featured: true,
+    trending: true
+  },
+  {
+    id: "wallpo-7",
+    title: "Lionel Messi World Champion",
+    category: "lionel-messi",
+    style: "cinematic",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Lionel Messi holding World Cup trophy in stadium under golden fireworks, celestial sky, victorious cinematic sports atmosphere",
+    image: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=1080&auto=format&fit=crop&q=90",
+    likes: 6890,
+    tags: ["Messi", "LM10", "Football", "World Cup", "Champion"],
+    colors: ["#38BDF8", "#F59E0B", "#0369A1"],
+    featured: true,
+    trending: true
+  },
+  {
+    id: "wallpo-8",
+    title: "Liquid Iridescent Abstract 3D",
+    category: "abstract",
+    style: "abstract",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Abstract fluid chrome and glass ribbons swirling in zero gravity, vibrant holographic chromatic dispersion, midnight dark background",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1080&auto=format&fit=crop&q=90",
+    likes: 2180,
+    tags: ["Abstract", "3D", "Glass", "Chrome", "Holographic"],
+    colors: ["#6366F1", "#A855F7", "#EC4899"],
+    featured: false,
+    trending: true
+  },
+  {
+    id: "wallpo-9",
+    title: "Superbike Speed Demon",
+    category: "bikes",
+    style: "ultra-realistic",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Kawasaki Ninja H2R racing on wet highway at night, neon light trails, aggressive aerodynamics, carbon fiber, high speed blur",
+    image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=1080&auto=format&fit=crop&q=90",
+    likes: 1980,
+    tags: ["Bikes", "Superbike", "Racing", "Speed", "Motorcycle"],
+    colors: ["#22C55E", "#0F172A", "#E2E8F0"],
+    featured: false,
+    trending: true
+  },
+  {
+    id: "wallpo-10",
+    title: "Misty Alpine Peak Sunrise",
+    category: "mountains",
+    style: "nature-photography",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Majestic snow-capped mountain peak towering above sea of rolling clouds, warm golden alpine sunrise glow, razor-sharp rocky details",
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1080&auto=format&fit=crop&q=90",
+    likes: 3100,
+    tags: ["Mountains", "Alps", "Nature", "Sunrise", "Clouds"],
+    colors: ["#F59E0B", "#0284C7", "#F8FAFC"],
+    featured: false,
+    trending: true
+  },
+  {
+    id: "wallpo-11",
+    title: "Mythical Phoenix of Embers",
+    category: "fantasy",
+    style: "fantasy",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Glorious flaming mythical phoenix bird rising from golden ash, glowing fiery feathers, swirling magma embers, dramatic dark fantasy art",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1080&auto=format&fit=crop&q=90",
+    likes: 4500,
+    tags: ["Fantasy", "Phoenix", "Fire", "Mythical", "Glowing"],
+    colors: ["#EF4444", "#F59E0B", "#7C2D12"],
+    featured: true,
+    trending: true
+  },
+  {
+    id: "wallpo-12",
+    title: "Neon Panther in Jungle",
+    category: "animals",
+    style: "neon-art",
+    aspect: "mobile-9-16",
+    resolution: "4K (1080×1920)",
+    prompt: "Black panther stalking through dark rain forest, glowing electric neon cyan and purple veins, piercing golden eyes, mystical bioluminescence",
+    image: "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=1080&auto=format&fit=crop&q=90",
+    likes: 3780,
+    tags: ["Animals", "Panther", "Neon", "Bioluminescent", "Wildlife"],
+    colors: ["#38BDF8", "#8B5CF6", "#040810"],
+    featured: false,
+    trending: true
+  }
+];
+
+const RANDOM_PROMPT_IDEAS = [
+  "A majestic cybernetic samurai warrior standing on high-rise balcony looking over futuristic neon rain metropolis, katana glowing purple, 4K wallpaper",
+  "Futuristic glass terrarium sphere floating in deep space containing miniature luminous enchanted rainforest and waterfalls, 8k",
+  "Ultra-realistic cinematic night sky filled with glowing stars, purple nebula clouds, distant galaxies, atmospheric lighting, incredible detail, 4K wallpaper",
+  "Matte black Bugatti Chiron in dark luxury showroom with gold geometric LED ceiling lights, sleek reflections, hyper-detailed 8K",
+  "Pure AMOLED true-black background with glowing minimalist neon jellyfish pulsing with electric cyan and magenta tentacles, OLED 8K",
+  "Anime girl with silver hair standing on cliff under aurora borealis northern lights, shooting star, Makoto Shinkai aesthetic, 4K",
+  "Majestic snow lion with ice-crystal mane on icy mountain summit during fiery sunset, National Geographic 8k award winner",
+  "Cyberpunk Ferrari racing across rain-soaked highway with neon blue exhaust flames, cyberpunk city skyline, 8K wallpaper",
+  "Futuristic underwater biome city inside giant glass dome beneath deep bioluminescent ocean, glowing whales passing by, 4K render"
+];
+
+const PROMPT_ENHANCERS = {
+  lighting: [
+    "cinematic volumetric lighting",
+    "atmospheric god rays",
+    "soft golden hour sunlight",
+    "neon accent illumination",
+    "moody chiaroscuro shadows",
+    "bioluminescent soft glow"
+  ],
+  atmosphere: [
+    "mystical floating particles",
+    "ethereal purple nebula clouds",
+    "rainy reflective surfaces",
+    "gentle ambient mist",
+    "dramatic storm clouds",
+    "sparkling dust motes"
+  ],
+  quality: [
+    "8k resolution",
+    "award-winning masterpiece",
+    "shot on Hasselblad 100MP",
+    "hyper-detailed textures",
+    "flawless composition",
+    "ray-traced reflections"
+  ]
+};
